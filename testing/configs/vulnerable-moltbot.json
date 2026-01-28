@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "lastTouchedVersion": "1.0.0",
+    "lastTouchedAt": "2025-01-01T00:00:00Z"
+  },
+  "gateway": {
+    "port": 18789,
+    "bind": "0.0.0.0",
+    "auth": {
+      "mode": "none"
+    }
+  },
+  "discovery": {
+    "mdns": {
+      "mode": "full"
+    }
+  }
+}

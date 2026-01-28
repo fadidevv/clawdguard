@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  clawdguard:
+    build: .
+    container_name: clawdguard
+    volumes:
+      # Mount both config directories (tool auto-detects which exists)
+      - ~/.moltbot:/root/.moltbot
+      - ~/.clawdbot:/root/.clawdbot
+      - ./results:/app/results
+    working_dir: /app
+    # Override command as needed:
+    # command: ["--scan-only"]
+    # command: ["--auto"]
+    # command: ["--verbose"]

@@ -1,0 +1,62 @@
+# ClawdGuard Test Environment
+
+FROM rust:bookworm as builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy source code
+COPY Cargo.toml ./
+COPY src ./src
+
+# Build release binary
+RUN cargo build --release
+
+# Runtime stage
+FROM debian:bookworm-slim
+
+WORKDIR /app
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    libssl3 \
+    procps \
+    net-tools \
+    iproute2 \
+    netcat-openbsd \
+    curl \
+    jq \
+    sudo \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy ClawdGuard binary
+COPY --from=builder /app/target/release/clawdguard /usr/local/bin/clawdguard
+
+# Copy test files
+COPY testing/configs/ /test-configs/
+COPY testing/mock-gateway/ /mock-gateway/
+COPY testing/full-test.sh /testing/full-test.sh
+
+# Make scripts executable
+RUN chmod +x /mock-gateway/server.js /testing/full-test.sh
+
+# Create test user with sudo access
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER testuser
+WORKDIR /home/testuser
+
+# Create directories
+RUN mkdir -p results
+
+# Run tests
+CMD ["bash", "/testing/full-test.sh"]

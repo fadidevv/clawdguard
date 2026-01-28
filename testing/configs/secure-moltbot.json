@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "lastTouchedVersion": "1.0.0",
+    "lastTouchedAt": "2025-01-28T00:00:00Z"
+  },
+  "gateway": {
+    "port": 18789,
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "clwd_existingtoken12345678901234"
+    }
+  },
+  "discovery": {
+    "mdns": {
+      "mode": "minimal"
+    }
+  }
+}
