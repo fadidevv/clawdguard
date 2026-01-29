@@ -35,30 +35,30 @@ Security hardening for Clawdbot/Moltbot installations. Detects and fixes exposed
 
 | Risk | Impact |
 |------|--------|
-| 🔑 Access API keys | Steal OpenAI, Anthropic, and other credentials |
-| 💻 Execute commands | Run arbitrary shell commands on your machine |
-| 🌐 Control browser | Take over your browsing session |
-| 📧 Read emails | Access Gmail, calendar, contacts |
-| 💬 Read chats | See all your conversation history |
-| 🤖 Hijack the bot | Send messages on your behalf |
+| Access API keys | Steal OpenAI, Anthropic, and other credentials |
+| Execute commands | Run arbitrary shell commands on your machine |
+| Control browser | Take over your browsing session |
+| Read emails | Access Gmail, calendar, contacts |
+| Read chats | See all your conversation history |
+| Hijack the bot | Send messages on your behalf |
 
 The issue isn't a bug—it's **misconfiguration**. Users who change `gateway.bind` to `0.0.0.0` or use Docker with `-p 18789:18789` without proper auth are fully exposed.
 
-**ClawdGuard addresses these issues.**
+ClawdGuard fixes this.
 
 ---
 
 ## Features
 
-- 🔍 **Auto-Detect**: Finds config, service, and running gateway automatically
-- 📊 **Risk Analysis**: Scores your configuration 0-10 with detailed breakdown
-- 🔧 **One-Click Fix**: Patches config, generates secure token, restarts service
-- ✅ **Verification**: Confirms the fix worked (port closed, auth required)
-- 💾 **Safe**: Creates timestamped backup before any changes
-- 🖥️ **Cross-Platform**: macOS (launchd) and Linux (systemd)
-- ⏹️ **Graceful Stop**: Press Ctrl+C anytime to cancel safely
-- 📝 **Verbose Mode**: See detailed logs of every check being performed
-- 🐳 **Docker Ready**: No Rust installation required - just use Docker
+- **Auto-Detect** - Finds config, service, and running gateway automatically
+- **Risk Analysis** - Scores your configuration 0-10 with detailed breakdown
+- **One-Click Fix** - Patches config, generates secure token, restarts service
+- **Verification** - Confirms the fix worked (port closed, auth required)
+- **Safe** - Creates timestamped backup before any changes
+- **Cross-Platform** - macOS (launchd) and Linux (systemd)
+- **Graceful Stop** - Press Ctrl+C anytime to cancel safely
+- **Verbose Mode** - See detailed logs of every check being performed
+- **Docker Ready** - No Rust installation required
 
 ---
 
@@ -113,11 +113,11 @@ clawdguard
 
 That's it! ClawdGuard will:
 
-1. **Detect** your Clawdbot/Moltbot installation
-2. **Analyze** security risks in your configuration
-3. **Ask** for confirmation before making changes
-4. **Patch** the config with secure settings
-5. **Verify** the fixes were successful
+1. Detect your Clawdbot/Moltbot installation
+2. Analyze security risks in your configuration
+3. Ask for confirmation before making changes
+4. Patch the config with secure settings
+5. Verify the fixes were successful
 
 ### 3. Save Your Token
 
@@ -305,13 +305,9 @@ ClawdGuard calculates a risk score from 0-10:
 ### Normal Mode
 
 ```
-     ___  __    ____  _    _  ____  ___  _  _   __   ____  ____
-    / __)(  )  (  _ \/ )  ( \(  _ \/ __)/ )( \ / _\ (  _ \(    \
-   ( (__ / (_/\ ) _ (\ \__/ / ) __/\__ \) \/ (/    \ )   / ) D (
-    \___)\____/(____/ \____/ (__)  (___/\____/\_/\_/(__\_)(____/
-
-           🦞 Security hardening for Clawdbot/Moltbot
-                              v1.0.0
+  🦞 ClawdGuard
+  Security hardening for Clawdbot/Moltbot
+  v1.0.0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -408,7 +404,7 @@ If you need remote access, use one of these **secure** methods:
 | **SSH Tunnel** | `ssh -L 18789:localhost:18789 your-server` |
 | **Cloudflare Tunnel** | `cloudflared tunnel --url http://localhost:18789` |
 
-**⚠️ Never** change `gateway.bind` back to `0.0.0.0` or expose the port directly.
+**Never** change `gateway.bind` back to `0.0.0.0` or expose the port directly.
 
 ---
 
@@ -609,7 +605,7 @@ Contributions welcome! Please:
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This tool is for **security purposes only**.
 

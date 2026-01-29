@@ -30,42 +30,12 @@ use colored::Colorize;
 use comfy_table::{presets::UTF8_FULL_CONDENSED, ContentArrangement, Table};
 use indicatif::{ProgressBar, ProgressStyle};
 
-/// ASCII art logo displayed at application startup.
-///
-/// The logo spells "CLAWDGUARD" in a stylized font and is displayed
-/// in cyan color for brand recognition.
-const LOGO: &str = r#"
-     ___  __    ____  _    _  ____  ___  _  _   __   ____  ____
-    / __)(  )  (  _ \/ )  ( \(  _ \/ __)/ )( \ / _\ (  _ \(    \
-   ( (__ / (_/\ ) _ (\ \__/ / ) __/\__ \) \/ (/    \ )   / ) D (
-    \___)\____/(____/ \____/ (__)  (___/\____/\_/\_/(__\_)(____/
-"#;
-
-/// Prints the application banner with logo and version information.
-///
-/// Displays the ASCII art logo, tagline, and version number at the
-/// start of the application. Also prints a horizontal separator line.
-///
-/// # Output Format
-///
-/// ```text
-///      ___  __    ____  _    _  ____  ___  _  _   __   ____  ____
-///     / __)(  )  (  _ \/ )  ( \(  _ \/ __)/ )( \ / _\ (  _ \(    \
-///    ( (__ / (_/\ ) _ (\ \__/ / ) __/\__ \) \/ (/    \ )   / ) D (
-///     \___)\____/(____/ \____/ (__)  (___/\____/\_/\_/(__\_)(____/
-///
-///            🦞 Security hardening for Clawdbot/Moltbot
-///                               v1.0.0
-///
-/// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-/// ```
+/// Prints the application banner with version information.
 pub fn print_banner() {
-    println!("{}", LOGO.cyan());
-    println!(
-        "{}",
-        "           🦞 Security hardening for Clawdbot/Moltbot".bright_black()
-    );
-    println!("{}", "                              v1.0.0".bright_black());
+    println!();
+    println!("{}", "  🦞 ClawdGuard".cyan().bold());
+    println!("{}", "  Security hardening for Clawdbot/Moltbot".bright_black());
+    println!("{}", "  v1.0.0".bright_black());
     println!();
     println!("{}", "━".repeat(70).bright_black());
     println!();
