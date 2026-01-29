@@ -119,7 +119,12 @@ pub fn apply_patches(
     // Step 2: Generate or use provided token if auth is missing
     let token = if risk_report.auth_missing {
         let t = match custom_token {
-            Some(ct) => ct.to_string(),
+            Some(ct) => {
+                if ct.len() < 16 {
+                    return Err("Custom token must be at least 16 characters long".to_string());
+                }
+                ct.to_string()
+            }
             None => generate_secure_token(32),
         };
         result.generated_token = Some(t.clone());

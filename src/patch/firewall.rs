@@ -105,6 +105,23 @@ fn add_ufw_rule(verbose: bool) -> Result<bool, String> {
         return Ok(false);
     }
 
+    // Allow localhost access first (before deny rule)
+    let _ = Command::new("sudo")
+        .args([
+            "ufw",
+            "allow",
+            "from",
+            "127.0.0.1",
+            "to",
+            "any",
+            "port",
+            &GATEWAY_PORT.to_string(),
+            "proto",
+            "tcp",
+        ])
+        .output();
+
+    // Deny external access
     let output = Command::new("sudo")
         .args([
             "ufw",

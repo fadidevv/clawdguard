@@ -143,11 +143,18 @@ pub fn patch_config(
         }
     }
 
-    // Serialize and write back to file
+    // Serialize and write back to file atomically (write to temp, then rename)
     let output = serde_json::to_string_pretty(&config)
         .map_err(|e| format!("Failed to serialize config: {}", e))?;
 
-    fs::write(config_path, output).map_err(|e| format!("Failed to write config: {}", e))?;
+    let dir = config_path
+        .parent()
+        .ok_or("Config file has no parent directory")?;
+    let temp_path = dir.join(".clawdguard_config.tmp");
+
+    fs::write(&temp_path, &output).map_err(|e| format!("Failed to write temp config: {}", e))?;
+    fs::rename(&temp_path, config_path)
+        .map_err(|e| format!("Failed to rename temp config: {}", e))?;
 
     Ok(changes)
 }

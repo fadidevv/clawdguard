@@ -38,10 +38,8 @@ pub async fn verify_port_closed(verbose: bool) -> bool {
     let lan_ip = match local_ip_address::local_ip() {
         Ok(ip) => ip.to_string(),
         Err(e) => {
-            if verbose {
-                eprintln!("Could not determine LAN IP: {}", e);
-            }
-            // Assume closed if we can't determine LAN IP
+            eprintln!("Warning: Could not determine LAN IP ({}), skipping external port check", e);
+            eprintln!("  -> Verify manually that port {} is not reachable externally", crate::DEFAULT_PORT);
             return true;
         }
     };
